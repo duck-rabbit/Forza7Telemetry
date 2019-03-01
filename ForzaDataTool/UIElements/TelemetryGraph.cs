@@ -7,10 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace ForzaDataTool
+namespace ForzaDataTool.UIElements
 {
-    public class TelemetryGraph
+    public abstract class TelemetryGraph
     {
+        public static int Y_RESOLUTION = 100;
+
         public string GraphName { get; set; }
 
         public SolidColorBrush StrokeColor { get; set; }
@@ -23,18 +25,12 @@ namespace ForzaDataTool
 
         public PathGeometry GraphGeometry { get; set; }
 
-        private PathFigure graphFigure = new PathFigure();
+        protected PathFigure graphFigure = new PathFigure();
 
         public TelemetryGraph(string name, Color color)
         {
             GraphName = name;
             StrokeColor = new SolidColorBrush(color);
-
-            Val0 = "0%";
-            Val25 = "25%";
-            Val50 = "50%";
-            Val75 = "75%";
-            Val100 = "100%";
 
             GraphGeometry = new PathGeometry();
             GraphGeometry.Figures = new PathFigureCollection();
@@ -51,16 +47,18 @@ namespace ForzaDataTool
             {
                 graphFigure = new PathFigure();
                 graphFigure.Segments = new PathSegmentCollection();
-                graphFigure.StartPoint = new Point(0, 100 - (double)value * 0.39215d);
+                graphFigure.StartPoint = new Point(0, YPointValue(value));
 
                 return;
             }
             else
             {
-                graphFigure.Segments.Add(new LineSegment(new Point(step, 100 - (double)value * 0.39215d), true));
+                graphFigure.Segments.Add(new LineSegment(new Point(0, YPointValue(value)), true));
             }
 
             GraphGeometry.Figures[0] = graphFigure;
         }
+
+        public abstract int YPointValue(int input);
     }
 }

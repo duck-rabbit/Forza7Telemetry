@@ -1,4 +1,5 @@
 ﻿using ForzaDataCollector;
+using ForzaDataTool.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,6 @@ namespace ForzaDataTool
     public partial class Graphs : Page
     {
         public static double TRACK_LENGTH = 720;
-        public static double Y_RESOLUTION = 255;
 
         private double xResolution;
 
@@ -43,9 +43,13 @@ namespace ForzaDataTool
                 teleGraphs = graphs
             };
 
-            graphs.Add(new TelemetryGraph("THROTTLE", Colors.LightGreen));
-            graphs.Add(new TelemetryGraph("BRAKE", Colors.Red));
-            graphs.Add(new TelemetryGraph("STEERING", Colors.White));
+            graphs.Add(new DynamicValueGraph("SPEED", Colors.Yellow));
+            graphs.Add(new PercentageFromByteGraph("THROTTLE", Colors.LightGreen));
+            graphs.Add(new PercentageFromByteGraph("BRAKE", Colors.Red));
+            graphs.Add(new SteeringGraph("STEERING", Colors.White));
+            graphs.Add(new DynamicValueGraph("RPM", Colors.LightGoldenrodYellow));
+            graphs.Add(new DynamicValueGraph("POWER", Colors.OrangeRed));
+            graphs.Add(new DynamicValueGraph("TORQUE", Colors.Magenta));
 
             graphHolder.ItemsSource = graphs;
 
@@ -64,9 +68,13 @@ namespace ForzaDataTool
                     lapStartDistance = data.DistanceTraveled.Value;
                     distanceStep = 0;
 
-                    graphs[0].UpdateGraph(0, (int)data.Accel, true);
-                    graphs[1].UpdateGraph(0, (int)data.Brake, true);
-                    graphs[2].UpdateGraph(0, (int)data.Steer, true);
+                    graphs[0].UpdateGraph(0, (int)(data.Speed * 3.6f), true);
+                    graphs[1].UpdateGraph(0, (int)data.Accel, true);
+                    graphs[2].UpdateGraph(0, (int)data.Brake, true);
+                    graphs[3].UpdateGraph(0, (int)data.Steer, true);
+                    graphs[4].UpdateGraph(0, (int)data.CurrentEngineRpm, true);
+                    graphs[5].UpdateGraph(0, (int)data.Power, true);
+                    graphs[6].UpdateGraph(0, (int)data.Torque, true);
 
                     distanceStep++;
 
@@ -75,9 +83,13 @@ namespace ForzaDataTool
 
                 if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
                 {
-                    graphs[0].UpdateGraph(distanceStep, (int)data.Accel);
-                    graphs[1].UpdateGraph(distanceStep, (int)data.Brake);
-                    graphs[2].UpdateGraph(distanceStep, (int)data.Steer);
+                    graphs[0].UpdateGraph(distanceStep, (int)(data.Speed * 3.6f));
+                    graphs[1].UpdateGraph(distanceStep, (int)data.Accel);
+                    graphs[2].UpdateGraph(distanceStep, (int)data.Brake);
+                    graphs[3].UpdateGraph(distanceStep, (int)data.Steer);
+                    graphs[4].UpdateGraph(distanceStep, (int)data.CurrentEngineRpm);
+                    graphs[5].UpdateGraph(distanceStep, (int)data.Power);
+                    graphs[6].UpdateGraph(distanceStep, (int)data.Torque);
 
                     distanceStep++;
                     return;

@@ -60,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UIElements\DynamicValueGraph.cs" />
+    <Compile Include="UIElements\SteeringGraph.cs" />
+    <Compile Include="UIElements\PercentageFromByteGraph.cs" />
     <Compile Include="UIElements\TelemetryGraph.cs" />
     <Page Include="Graphs.xaml">
       <SubType>Designer</SubType>
