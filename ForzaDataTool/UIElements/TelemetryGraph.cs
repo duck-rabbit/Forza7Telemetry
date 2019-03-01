@@ -4,47 +4,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace ForzaDataTool
 {
-    class TelemetryGraph
+    public class TelemetryGraph
     {
-        public int graphId;
-        public string graphName;
+        public string GraphName { get; set; }
 
-        public int xResolution;
-        public int yResolution;
+        public SolidColorBrush StrokeColor { get; set; }
 
-        public int maxValue;
-        public int minValue;
+        public string Val100 { get; set; }
+        public string Val75 { get; set; }
+        public string Val50 { get; set; }
+        public string Val25 { get; set; }
+        public string Val0 { get; set; }
 
-        private PathFigure graphGeometry;
+        public PathFigure GraphGeometry { get; set; }
 
-        public TelemetryGraph()
+        public TelemetryGraph(string name, Color color)
         {
-            graphGeometry = new PathFigure();
-            graphGeometry.Segments = new PathSegmentCollection();
+            GraphName = name;
+            StrokeColor = new SolidColorBrush(color);
 
-            ((PathGeometry)ThrottleGraph.Data).Figures.Add(throttleGraphGeometry);
+            Val0 = "0%";
+            Val25 = "25%";
+            Val50 = "50%";
+            Val75 = "75%";
+            Val100 = "100%";
+
+            GraphGeometry = new PathFigure();
+            GraphGeometry.Segments = new PathSegmentCollection();
+
         }
 
         public void UpdateGraph(int step, int value, bool reset = false)
         {
             if (reset)
             {
-                graphGeometry = new PathFigure();
-                graphGeometry.Segments = new PathSegmentCollection();
-                graphGeometry.StartPoint = new Point(0, 100 - (double)value * 0.39215d);
-
-                ((PathGeometry)ThrottleGraph.Data).Figures[0] = throttleGraphGeometry;
+                GraphGeometry = new PathFigure();
+                GraphGeometry.Segments = new PathSegmentCollection();
+                GraphGeometry.StartPoint = new Point(0, 100 - (double)value * 0.39215d);
 
                 return;
             }
             else
             {
-                graphGeometry.Segments.Add(new LineSegment(new Point(distanceStep, 100 - (double)data.Accel * 0.39215d), true));
-                ((PathGeometry)ThrottleGraph.Data).Figures[0] = throttleGraphGeometry;
+                GraphGeometry.Segments.Add(new LineSegment(new Point(step, 100 - (double)value * 0.39215d), true));
             }
         }
     }
