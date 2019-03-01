@@ -32,11 +32,22 @@ namespace ForzaDataTool
 
         private int distanceStep;
 
-        public List<Graphs> graphs = new List<Graphs>();
+        public List<TelemetryGraph> graphs = new List<TelemetryGraph>();
 
         public Graphs()
         {
             InitializeComponent();
+
+            DataContext = new
+            {
+                teleGraphs = graphs
+            };
+
+            graphs.Add(new TelemetryGraph("THROTTLE", Colors.LightGreen));
+            graphs.Add(new TelemetryGraph("BRAKE", Colors.Red));
+            graphs.Add(new TelemetryGraph("STEERING", Colors.White));
+
+            graphHolder.ItemsSource = graphs;
 
             ((App)App.Current).dataHandler += UpdateGraphs;
         }
@@ -45,13 +56,15 @@ namespace ForzaDataTool
         {
             if (data.LapNumber > currentLap)
             {
-                xResolution = TRACK_LENGTH / ThrottleCanvas.ActualWidth;
+                xResolution = TRACK_LENGTH / (graphHolder.ActualWidth - 31d);
 
                 currentLap = (int)data.LapNumber;
                 lapStartDistance = data.DistanceTraveled.Value;
                 distanceStep = 0;
 
-                
+                graphs[0].UpdateGraph(0, (int)data.Accel, true);
+                graphs[1].UpdateGraph(0, (int)data.Brake, true);
+                graphs[2].UpdateGraph(0, (int)data.Steer, true);
 
                 distanceStep++;
 
@@ -60,6 +73,10 @@ namespace ForzaDataTool
 
             if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
             {
+                graphs[0].UpdateGraph(distanceStep, (int)data.Accel);
+                graphs[1].UpdateGraph(distanceStep, (int)data.Brake);
+                graphs[2].UpdateGraph(distanceStep, (int)data.Steer);
+
                 distanceStep++;
                 return;
             }
