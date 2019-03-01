@@ -21,7 +21,9 @@ namespace ForzaDataTool
         public string Val25 { get; set; }
         public string Val0 { get; set; }
 
-        public PathFigure GraphGeometry { get; set; }
+        public PathGeometry GraphGeometry { get; set; }
+
+        private PathFigure graphFigure = new PathFigure();
 
         public TelemetryGraph(string name, Color color)
         {
@@ -34,8 +36,12 @@ namespace ForzaDataTool
             Val75 = "75%";
             Val100 = "100%";
 
-            GraphGeometry = new PathFigure();
-            GraphGeometry.Segments = new PathSegmentCollection();
+            GraphGeometry = new PathGeometry();
+            GraphGeometry.Figures = new PathFigureCollection();
+
+            graphFigure.Segments = new PathSegmentCollection();
+
+            GraphGeometry.Figures.Add(graphFigure);
 
         }
 
@@ -43,16 +49,18 @@ namespace ForzaDataTool
         {
             if (reset)
             {
-                GraphGeometry = new PathFigure();
-                GraphGeometry.Segments = new PathSegmentCollection();
-                GraphGeometry.StartPoint = new Point(0, 100 - (double)value * 0.39215d);
+                graphFigure = new PathFigure();
+                graphFigure.Segments = new PathSegmentCollection();
+                graphFigure.StartPoint = new Point(0, 100 - (double)value * 0.39215d);
 
                 return;
             }
             else
             {
-                GraphGeometry.Segments.Add(new LineSegment(new Point(step, 100 - (double)value * 0.39215d), true));
+                graphFigure.Segments.Add(new LineSegment(new Point(step, 100 - (double)value * 0.39215d), true));
             }
+
+            GraphGeometry.Figures[0] = graphFigure;
         }
     }
 }

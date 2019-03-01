@@ -66,11 +66,7 @@
                                     X2="{Binding ActualWidth, ElementName=TemplateCanvas}" Y2="75"
                                     StrokeThickness="1"
                                     />
-                                <Path Stroke="{Binding StrokeColor}" StrokeThickness="1">
-                                    <Path.Data>
-                                        <PathGeometry Figures="{Binding GraphGeometry}" />
-                                    </Path.Data>
-                                </Path>
+                                <Path Stroke="{Binding StrokeColor}" StrokeThickness="1" Data="{Binding GraphGeometry}" />
                             </Canvas>
                         </Grid>
                     </DataTemplate>

@@ -54,31 +54,34 @@ namespace ForzaDataTool
 
         public void UpdateGraphs(DataPiece data)
         {
-            if (data.LapNumber > currentLap)
+            if (data.IsRaceOn == 1)
             {
-                xResolution = TRACK_LENGTH / (graphHolder.ActualWidth - 31d);
+                if (data.LapNumber > currentLap)
+                {
+                    xResolution = TRACK_LENGTH / 1500d;
 
-                currentLap = (int)data.LapNumber;
-                lapStartDistance = data.DistanceTraveled.Value;
-                distanceStep = 0;
+                    currentLap = (int)data.LapNumber;
+                    lapStartDistance = data.DistanceTraveled.Value;
+                    distanceStep = 0;
 
-                graphs[0].UpdateGraph(0, (int)data.Accel, true);
-                graphs[1].UpdateGraph(0, (int)data.Brake, true);
-                graphs[2].UpdateGraph(0, (int)data.Steer, true);
+                    graphs[0].UpdateGraph(0, (int)data.Accel, true);
+                    graphs[1].UpdateGraph(0, (int)data.Brake, true);
+                    graphs[2].UpdateGraph(0, (int)data.Steer, true);
 
-                distanceStep++;
+                    distanceStep++;
 
-                return;
-            }
+                    return;
+                }
 
-            if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
-            {
-                graphs[0].UpdateGraph(distanceStep, (int)data.Accel);
-                graphs[1].UpdateGraph(distanceStep, (int)data.Brake);
-                graphs[2].UpdateGraph(distanceStep, (int)data.Steer);
+                if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
+                {
+                    graphs[0].UpdateGraph(distanceStep, (int)data.Accel);
+                    graphs[1].UpdateGraph(distanceStep, (int)data.Brake);
+                    graphs[2].UpdateGraph(distanceStep, (int)data.Steer);
 
-                distanceStep++;
-                return;
+                    distanceStep++;
+                    return;
+                }
             }
         }
 
