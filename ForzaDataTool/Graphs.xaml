@@ -41,7 +41,7 @@
                             <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Val25}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=Val0}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
-                            <Canvas Name="TemplateCanvas" Grid.Column="2" Grid.RowSpan="5" Height="100">
+                            <Canvas Name="TemplateCanvas" Grid.Column="2" Grid.RowSpan="5" Height="100" ClipToBounds="True">
                                 <Rectangle
                                     Height="100"
                                     Width="{Binding ActualWidth, ElementName=TemplateCanvas}"
