@@ -21,6 +21,7 @@
         </Grid.ColumnDefinitions>
         
         <Frame Source="Map.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Frame Grid.Column="1" Source="SectorSheet.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Frame Grid.Row="1" Grid.ColumnSpan="2" Source="Graphs.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>
 </Window>

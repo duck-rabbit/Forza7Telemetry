@@ -61,43 +61,40 @@ namespace ForzaDataTool
 
         public void UpdateGraphs(DataPiece data)
         {
-            if (data.IsRaceOn == 1)
+            if (data.LapNumber > currentLap)
             {
-                if (data.LapNumber > currentLap)
-                {
-                    xResolution = TRACK_LENGTH / 1500d;
+                xResolution = TRACK_LENGTH / 1500d;
 
-                    currentLap = (int)data.LapNumber;
-                    lapStartDistance = data.DistanceTraveled.Value;
-                    distanceStep = 0;
+                currentLap = (int)data.LapNumber;
+                lapStartDistance = data.DistanceTraveled.Value;
+                distanceStep = 0;
 
-                    graphs[0].UpdateGraph(0, (int)(data.Speed * 3.6f), true);
-                    graphs[1].UpdateGraph(0, (int)data.Accel, true);
-                    graphs[2].UpdateGraph(0, (int)data.Brake, true);
-                    graphs[3].UpdateGraph(0, (int)data.Steer, true);
-                    graphs[4].UpdateGraph(0, (int)data.CurrentEngineRpm, true);
-                    graphs[5].UpdateGraph(0, (int)data.Power / 1000, true);
-                    graphs[6].UpdateGraph(0, (int)data.Torque, true);
+                graphs[0].UpdateGraph(0, (int)(data.Speed * 3.6f), true);
+                graphs[1].UpdateGraph(0, (int)data.Accel, true);
+                graphs[2].UpdateGraph(0, (int)data.Brake, true);
+                graphs[3].UpdateGraph(0, (int)data.Steer, true);
+                graphs[4].UpdateGraph(0, (int)data.CurrentEngineRpm, true);
+                graphs[5].UpdateGraph(0, (int)data.Power / 1000, true);
+                graphs[6].UpdateGraph(0, (int)data.Torque, true);
 
-                    distanceStep++;
-                    return;
-                }
+                distanceStep++;
+                return;
+            }
 
 
-                if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
-                {
-                    graphs[0].UpdateGraph(distanceStep, (int)(data.Speed * 3.6f));
-                    graphs[1].UpdateGraph(distanceStep, (int)data.Accel);
-                    graphs[2].UpdateGraph(distanceStep, (int)data.Brake);
-                    graphs[3].UpdateGraph(distanceStep, (int)data.Steer);
-                    graphs[4].UpdateGraph(distanceStep, (int)data.CurrentEngineRpm);
-                    graphs[5].UpdateGraph(distanceStep, (int)data.Power / 1000);
-                    graphs[6].UpdateGraph(distanceStep, (int)data.Torque);
+            if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
+            {
+                graphs[0].UpdateGraph(distanceStep, (int)(data.Speed * 3.6f));
+                graphs[1].UpdateGraph(distanceStep, (int)data.Accel);
+                graphs[2].UpdateGraph(distanceStep, (int)data.Brake);
+                graphs[3].UpdateGraph(distanceStep, (int)data.Steer);
+                graphs[4].UpdateGraph(distanceStep, (int)data.CurrentEngineRpm);
+                graphs[5].UpdateGraph(distanceStep, (int)data.Power / 1000);
+                graphs[6].UpdateGraph(distanceStep, (int)data.Torque);
 
-                    distanceStep++;
+                distanceStep++;
 
-                    return;
-                }
+                return;
             }
         }
     }

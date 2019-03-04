@@ -60,8 +60,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Lap.cs" />
     <Compile Include="Map.xaml.cs">
       <DependentUpon>Map.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SectorSheet.xaml.cs">
+      <DependentUpon>SectorSheet.xaml</DependentUpon>
     </Compile>
     <Compile Include="UIElements\DynamicValueGraph.cs" />
     <Compile Include="UIElements\SteeringGraph.cs" />
@@ -87,6 +91,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SectorSheet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
