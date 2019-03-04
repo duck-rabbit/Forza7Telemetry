@@ -14,7 +14,7 @@ namespace ForzaDataTool.UIElements
 
         public DynamicValueGraph(string name, Color color) : base(name, color)
         {
-            ChangeMaxValue(278);
+            ChangeMaxValue(0);
         }
 
         public override int YPointValue(int input)
@@ -36,6 +36,8 @@ namespace ForzaDataTool.UIElements
             Val50 = (_maxValue / 2).ToString();
             Val75 = (_maxValue / 4 * 3).ToString();
             Val100 = _maxValue.ToString();
+
+            graphFigure.StartPoint = new Point(graphFigure.StartPoint.X, Y_RESOLUTION * (1 - fraction) + graphFigure.StartPoint.Y * fraction);
 
             foreach (LineSegment segment in graphFigure.Segments)
             {

@@ -31,8 +31,6 @@ namespace ForzaDataTool
 
         private int currentLap = -1;
 
-        private int checkInt = 0;
-
         private float lapStartDistance;
 
         private int distanceStep;
@@ -59,9 +57,6 @@ namespace ForzaDataTool
             graphHolder.ItemsSource = graphs;
 
             ((App)App.Current).dataHandler += UpdateGraphs;
-
-            Thread thread = new Thread(Increase);
-            thread.Start();
         }
 
         public void UpdateGraphs(DataPiece data)
@@ -81,7 +76,7 @@ namespace ForzaDataTool
                     graphs[2].UpdateGraph(0, (int)data.Brake, true);
                     graphs[3].UpdateGraph(0, (int)data.Steer, true);
                     graphs[4].UpdateGraph(0, (int)data.CurrentEngineRpm, true);
-                    graphs[5].UpdateGraph(0, (int)data.Power, true);
+                    graphs[5].UpdateGraph(0, (int)data.Power / 1000, true);
                     graphs[6].UpdateGraph(0, (int)data.Torque, true);
 
                     distanceStep++;
@@ -96,7 +91,7 @@ namespace ForzaDataTool
                     graphs[2].UpdateGraph(distanceStep, (int)data.Brake);
                     graphs[3].UpdateGraph(distanceStep, (int)data.Steer);
                     graphs[4].UpdateGraph(distanceStep, (int)data.CurrentEngineRpm);
-                    graphs[5].UpdateGraph(distanceStep, (int)data.Power);
+                    graphs[5].UpdateGraph(distanceStep, (int)data.Power / 1000);
                     graphs[6].UpdateGraph(distanceStep, (int)data.Torque);
 
                     distanceStep++;
