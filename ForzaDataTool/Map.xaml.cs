@@ -44,17 +44,17 @@ namespace ForzaDataTool
 
         public void UpdateGraph(DataPiece data)
         {
-            if (drawing)
+            if (!drawing)
             {
                 graphFigure = new PathFigure();
                 graphFigure.Segments = new PathSegmentCollection();
-                graphFigure.StartPoint = new Point((double)data.PositionX, (double)data.PositionY);
+                graphFigure.StartPoint = new Point(MapCanvas.ActualWidth -(double)data.PositionX - 250, MapCanvas.ActualHeight + (double)data.PositionZ + 30);
 
-                return;
+                drawing = true;
             }
             else
             {
-                graphFigure.Segments.Add(new LineSegment(new Point((double)data.PositionX, (double)data.PositionY), true));
+                graphFigure.Segments.Add(new LineSegment(new Point(MapCanvas.ActualWidth - (double)data.PositionX - 250, MapCanvas.ActualHeight + (double)data.PositionZ + 30), true));
             }
 
             graphGeometry.Figures[0] = graphFigure;

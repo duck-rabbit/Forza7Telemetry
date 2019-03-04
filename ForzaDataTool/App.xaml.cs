@@ -37,7 +37,8 @@ namespace ForzaDataTool
         {
             if (dataHandler != null)
             {
-                Dispatcher.Invoke(dataHandler, dataPiece);
+                if (dataPiece.IsRaceOn == 1)
+                    Dispatcher.Invoke(dataHandler, dataPiece);
             }
         }
     }

@@ -10,8 +10,8 @@
 
     <Grid>
         <Border Padding="10">
-            <Canvas Name="MapCanvas" Background="Black" ClipToBounds="True">
-                <Path Name="MapPath" Stroke="White" StrokeThickness="3" />
+            <Canvas Name="MapCanvas" Background="Black" ClipToBounds="False" RenderTransformOrigin="0.5, 0.5">
+                <Path Name="MapPath" Stroke="Red" StrokeThickness="3"/>
             </Canvas>
         </Border>
     </Grid>
