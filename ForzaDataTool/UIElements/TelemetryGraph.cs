@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,8 @@ using System.Windows.Media;
 
 namespace ForzaDataTool.UIElements
 {
-    public abstract class TelemetryGraph
+    [AddINotifyPropertyChangedInterface]
+    public abstract class TelemetryGraph : INotifyPropertyChanged
     {
         public static int Y_RESOLUTION = 100;
 
@@ -26,6 +29,8 @@ namespace ForzaDataTool.UIElements
         public PathGeometry GraphGeometry { get; set; }
 
         protected PathFigure graphFigure = new PathFigure();
+
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
         public TelemetryGraph(string name, Color color)
         {
@@ -53,7 +58,7 @@ namespace ForzaDataTool.UIElements
             }
             else
             {
-                graphFigure.Segments.Add(new LineSegment(new Point(0, YPointValue(value)), true));
+                graphFigure.Segments.Add(new LineSegment(new Point(step, YPointValue(value)), true));
             }
 
             GraphGeometry.Figures[0] = graphFigure;

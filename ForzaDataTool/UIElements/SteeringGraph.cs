@@ -20,7 +20,7 @@ namespace ForzaDataTool.UIElements
 
         public override int YPointValue(int input)
         {
-            return (int)((Y_RESOLUTION / 2) + input / (float)127 * Y_RESOLUTION);
+            return (int)((Y_RESOLUTION / 2) + input / (float)127 * Y_RESOLUTION / 2);
         }
     }
 }

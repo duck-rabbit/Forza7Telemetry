@@ -35,11 +35,11 @@
 
                             <TextBlock Grid.RowSpan="5" TextWrapping="Wrap" Text="{Binding GraphName}" Foreground="{Binding StrokeColor}" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Val100}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Val75}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Val50}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Val25}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=Val0}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Val100, BindsDirectlyToSource=True}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Val75, BindsDirectlyToSource=True}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Val50, BindsDirectlyToSource=True}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Val25, BindsDirectlyToSource=True}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=Val0, BindsDirectlyToSource=True}" Foreground="#FF666666" FontSize="8" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
                             <Canvas Name="TemplateCanvas" Grid.Column="2" Grid.RowSpan="5" Height="100">
                                 <Rectangle

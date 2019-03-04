@@ -27,18 +27,19 @@ namespace ForzaDataTool.UIElements
 
         public void ChangeMaxValue(int value)
         {
+            int oldMaxValue = _maxValue;
             _maxValue = ((value / 50)  + 1) * 50 ;
-            double fraction = (double)value / (double)_maxValue;
+            double fraction = (double)oldMaxValue / (double)_maxValue;
 
-            Val0 = (0).ToString();
+            Val0 = 0.ToString();
             Val25 = (_maxValue / 4).ToString();
             Val50 = (_maxValue / 2).ToString();
             Val75 = (_maxValue / 4 * 3).ToString();
-            Val100 = (_maxValue).ToString();
+            Val100 = _maxValue.ToString();
 
             foreach (LineSegment segment in graphFigure.Segments)
             {
-                segment.Point = new Point(segment.Point.X, segment.Point.Y * fraction);
+                segment.Point = new Point(segment.Point.X, Y_RESOLUTION * (1 - fraction) + segment.Point.Y * fraction);
             }
         }
     }

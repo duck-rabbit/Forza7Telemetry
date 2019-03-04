@@ -2,6 +2,7 @@
 using ForzaDataTool.UIElements;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace ForzaDataTool
     /// </summary>
     public partial class Graphs : Page
     {
-        public static double TRACK_LENGTH = 720;
+
+        public static double TRACK_LENGTH = 1940;
 
         private double xResolution;
 
@@ -77,11 +79,8 @@ namespace ForzaDataTool
                     graphs[6].UpdateGraph(0, (int)data.Torque, true);
 
                     distanceStep++;
-
-                    return;
                 }
-
-                if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
+                else if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
                 {
                     graphs[0].UpdateGraph(distanceStep, (int)(data.Speed * 3.6f));
                     graphs[1].UpdateGraph(distanceStep, (int)data.Accel);
@@ -92,8 +91,11 @@ namespace ForzaDataTool
                     graphs[6].UpdateGraph(distanceStep, (int)data.Torque);
 
                     distanceStep++;
+
                     return;
                 }
+               
+                graphHolder.ItemsSource = graphs;
             }
         }
 
