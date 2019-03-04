@@ -14,7 +14,7 @@ namespace ForzaDataTool.UIElements
 
         public DynamicValueGraph(string name, Color color) : base(name, color)
         {
-            ChangeMaxValue(0);
+            ChangeMaxValue(278);
         }
 
         public override int YPointValue(int input)

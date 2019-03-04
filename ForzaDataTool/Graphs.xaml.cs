@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,6 +30,8 @@ namespace ForzaDataTool
         private double xResolution;
 
         private int currentLap = -1;
+
+        private int checkInt = 0;
 
         private float lapStartDistance;
 
@@ -56,6 +59,9 @@ namespace ForzaDataTool
             graphHolder.ItemsSource = graphs;
 
             ((App)App.Current).dataHandler += UpdateGraphs;
+
+            Thread thread = new Thread(Increase);
+            thread.Start();
         }
 
         public void UpdateGraphs(DataPiece data)
@@ -79,8 +85,11 @@ namespace ForzaDataTool
                     graphs[6].UpdateGraph(0, (int)data.Torque, true);
 
                     distanceStep++;
+                    return;
                 }
-                else if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
+
+
+                if (data.DistanceTraveled >= lapStartDistance + (distanceStep * xResolution))
                 {
                     graphs[0].UpdateGraph(distanceStep, (int)(data.Speed * 3.6f));
                     graphs[1].UpdateGraph(distanceStep, (int)data.Accel);
@@ -94,11 +103,7 @@ namespace ForzaDataTool
 
                     return;
                 }
-               
-                graphHolder.ItemsSource = graphs;
             }
         }
-
-
     }
 }
