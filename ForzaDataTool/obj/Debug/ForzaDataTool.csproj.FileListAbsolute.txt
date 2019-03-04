@@ -113,3 +113,5 @@ C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\D
 C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\Debug\ForzaDataTool.csproj.CopyComplete
 C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\Debug\ForzaDataTool.exe
 C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\Debug\ForzaDataTool.pdb
+C:\Users\alephTWO-G\Documents\GitHub\Forza7Telemetry\ForzaDataTool\obj\Debug\Map.g.cs
+C:\Users\alephTWO-G\Documents\GitHub\Forza7Telemetry\ForzaDataTool\obj\Debug\Map.baml

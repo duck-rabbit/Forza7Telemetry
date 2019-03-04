@@ -9,6 +9,18 @@
         WindowState="Maximized"
         Title="Forza 7 Data Tool">
     <Grid>
-        <Frame Source="Graphs.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Frame Source="Map.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Frame Grid.Row="1" Grid.ColumnSpan="2" Source="Graphs.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>
 </Window>
