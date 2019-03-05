@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,7 @@ namespace ForzaDataTool
 
         private int interStep = 0;
 
-        private int[] interDistances = new int[] { 450, 735, 1005, 1350, 1580 };
+        private int[] interDistances = new int[] { 450, 735, 1005, 1350, 1580, 1940};
 
         private float lapStartDistance;
 
@@ -50,7 +51,7 @@ namespace ForzaDataTool
             col = new DataGridTextColumn();
             col.Header = "Lap Time";
             col.Binding = new Binding("LapTime");
-            col.Binding.StringFormat = "m:ss.fff";
+            col.Binding.StringFormat = "m\\:ss\\.fff";
             LapChart.Columns.Add(col);
 
             for (int i = 0; i < interDistances.Length; i++)
@@ -58,21 +59,23 @@ namespace ForzaDataTool
                 col = new DataGridTextColumn();
                 col.Header = string.Format("i{0} @{1}m", i + 1, interDistances[i]);
                 col.Binding = new Binding(string.Format("InterTimes[{0}]", i));
-                col.Binding.StringFormat = "m:ss.fff";
+                col.Binding.StringFormat = "m\\:ss\\.fff";
                 LapChart.Columns.Add(col);
             }
+
+            ((App)App.Current).dataHandler += UpdateSheet;
         }
 
         public void UpdateSheet(DataPiece data)
         {
             if (data.LapNumber > currentLap)
             {
-                if (data.LapNumber > 0)
-                {
+                //if (data.LapNumber + 1 > 0)
+                //{
                     currentLap = (int)data.LapNumber;
                     lapStartDistance = data.DistanceTraveled.Value;
 
-                    if (data.LapNumber >= 2)
+                    if (data.LapNumber >= 1)
                     {
                         laps[laps.Count - 1].LapTime = TimeSpan.FromSeconds((double)data.LastLap);
                     }
@@ -84,19 +87,22 @@ namespace ForzaDataTool
                     interStep = 0;
 
                     previousInterTime = data.CurrentRaceTime.Value;
-                }
+
+                    LapChart.Items.Refresh();
+                //}
 
                 return;
             }
 
 
-            if (data.DistanceTraveled - lapStartDistance >= interDistances[interStep])
+            if (data.DistanceTraveled - lapStartDistance >= interDistances[interStep] && interStep < interDistances.Length - 1)
             {
                 laps[laps.Count - 1].InterTimes[interStep] = TimeSpan.FromSeconds(data.CurrentRaceTime.Value - previousInterTime);
 
                 interStep++;
-
                 previousInterTime = data.CurrentRaceTime.Value;
+
+                LapChart.Items.Refresh();
 
                 return;
             }

@@ -48,13 +48,13 @@ namespace ForzaDataTool
             {
                 graphFigure = new PathFigure();
                 graphFigure.Segments = new PathSegmentCollection();
-                graphFigure.StartPoint = new Point(MapCanvas.ActualWidth -(double)data.PositionX - 350, MapCanvas.ActualHeight + (double)data.PositionZ + 30);
+                graphFigure.StartPoint = new Point(MapCanvas.ActualWidth - (double)data.PositionX - 450, MapCanvas.ActualHeight + (double)data.PositionZ + 30);
 
                 drawing = true;
             }
             else
             {
-                graphFigure.Segments.Add(new LineSegment(new Point(MapCanvas.ActualWidth - (double)data.PositionX - 350, MapCanvas.ActualHeight + (double)data.PositionZ + 30), true));
+                graphFigure.Segments.Add(new LineSegment(new Point(MapCanvas.ActualWidth - (double)data.PositionX - 450, MapCanvas.ActualHeight + (double)data.PositionZ + 30), true));
             }
 
             graphGeometry.Figures[0] = graphFigure;

@@ -119,3 +119,5 @@ C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\D
 C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\Debug\Map.baml
 C:\Users\alephTWO-G\Documents\GitHub\Forza7Telemetry\ForzaDataTool\obj\Debug\SectorSheet.g.cs
 C:\Users\alephTWO-G\Documents\GitHub\Forza7Telemetry\ForzaDataTool\obj\Debug\SectorSheet.baml
+C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\Debug\SectorSheet.g.cs
+C:\Users\rw-attoONE\Documents\ForzaTelemetry\Forza7Telemetry\ForzaDataTool\obj\Debug\SectorSheet.baml
